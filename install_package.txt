@@ -1,3 +1,7 @@
 1. Tailwind CSS 
     1.1. npm install -D tailwindcss
     Guide : https://tailwindcss.com/docs/guides/create-react-app
+
+2. React Router DOM 
+    2.1. npm install react-router-dom
+    Guide : https://reactrouter.com/en/main/start/tutorial
