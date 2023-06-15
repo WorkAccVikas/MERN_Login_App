@@ -1,1 +1,2 @@
 1. Setup at Frontend side.
+2. FD : Install Tailwind CSS.
