@@ -1,10 +1,23 @@
 import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+// Todo : root routes
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>Root Route</div>,
+  },
+  {
+    path: "/register",
+    element: <div>Register Route</div>,
+  },
+]);
 
 function App() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
+    <main>
+      <RouterProvider router={router}/>
+    </main>
   );
 }
 
