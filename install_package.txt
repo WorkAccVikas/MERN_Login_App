@@ -5,3 +5,6 @@
 2. React Router DOM 
     2.1. npm install react-router-dom
     Guide : https://reactrouter.com/en/main/start/tutorial
+
+3. Formik and toast 
+    3.1. npm install formik react-hot-toast
