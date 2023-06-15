@@ -1,3 +1,5 @@
 1. Setup at Frontend side.
 2. FD : Install Tailwind CSS.
-3. FD : Install React Router DOM.
+3. Install React Router DOM.
+4. FD : Install React Router DOM.
+5. FD : Updated React Router DOM.
