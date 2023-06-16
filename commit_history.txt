@@ -10,3 +10,5 @@
 9. FD : Component = Register
 10. FD : Component = Profile
 11. FD : Fix UI 
+
+12. BD : Setup at Backend side

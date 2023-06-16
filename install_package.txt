@@ -8,3 +8,6 @@
 
 3. Formik and toast 
     3.1. npm install formik react-hot-toast
+
+4. Backend 
+    4.1. npm install express cors mongoose mongodb-memory-server multer nodemon morgan
