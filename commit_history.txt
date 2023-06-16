@@ -5,3 +5,5 @@
 5. FD : Updated React Router DOM.
 6. FD : Component = Username (Login UI)
 7. FD : Component = Username (Formik)
+8. FD : Reset UI 
+    Here, Component = Password,Recovery,Reset
