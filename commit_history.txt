@@ -9,3 +9,4 @@
     Here, Component = Password,Recovery,Reset
 9. FD : Component = Register
 10. FD : Component = Profile
+11. FD : Fix UI 
