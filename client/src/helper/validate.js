@@ -31,6 +31,12 @@ export async function registerValidation(values) {
   return errors;
 }
 
+// Todo : Validate profile page
+export async function profileValidation(values) {
+  const errors = emailVerify({}, values);
+  return errors;
+}
+
 // Todo : Validate username
 function usernameVerify(error = {}, values) {
   if (!values.username) {
@@ -43,6 +49,7 @@ function usernameVerify(error = {}, values) {
 
 // Todo : Validate username
 function passwordVerify(error = {}, values) {
+  /* eslint-disable no-useless-escape */
   const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
   if (!values.password) {
@@ -61,6 +68,7 @@ function passwordVerify(error = {}, values) {
 
 // Todo : Validate email
 function emailVerify(error = {}, values) {
+  /* eslint-disable no-useless-escape */
   const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
   if (!values.email) {

@@ -8,3 +8,4 @@
 8. FD : Reset UI 
     Here, Component = Password,Recovery,Reset
 9. FD : Component = Register
+10. FD : Component = Profile

@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { useFormik } from "formik";
 import { registerValidation } from "../helper/validate";
 import convertToBase64 from "../helper/convert";
+
 function Register() {
   const [file, setFile] = useState();
 
@@ -34,7 +35,10 @@ function Register() {
     <div className="container mx-auto">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="flex justify-center items-center h-screen">
-        <div className={styles.glass} style={{ width: "50%" }}>
+        <div
+          className={styles.glass}
+          style={{ width: "45%", paddingTop: "3em" }}
+        >
           <div className="title flex flex-col items-center">
             <h4 className="text-5xl font-bold">Register</h4>
             <span className="py-4 text-xl w-2/3 text-center text-gray-500">
