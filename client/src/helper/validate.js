@@ -12,7 +12,7 @@ export async function passwordValidate(values) {
   return errors;
 }
 
-// Todo : Validate
+// Todo : Validate on reset page
 export async function resetPasswordValidation(values) {
   const errors = passwordVerify({}, values);
 
@@ -20,6 +20,14 @@ export async function resetPasswordValidation(values) {
     errors.exist = toast.error("Password not match...!");
   }
 
+  return errors;
+}
+
+// Todo : Validate register form
+export async function registerValidation(values) {
+  const errors = usernameVerify({}, values);
+  passwordVerify(errors, values);
+  emailVerify(errors, values);
   return errors;
 }
 
@@ -48,5 +56,20 @@ function passwordVerify(error = {}, values) {
   } else if (!specialChars.test(values.password)) {
     error.password = toast.error("Password must have special character...!");
   }
+  return error;
+}
+
+// Todo : Validate email
+function emailVerify(error = {}, values) {
+  const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+  if (!values.email) {
+    error.email = toast.error("Email Required...!");
+  } else if (values.email.includes(" ")) {
+    error.email = toast.error("Wrong Email...!");
+  } else if (!emailPattern.test(values.email)) {
+    error.email = toast.error("Invalid email address...!");
+  }
+
   return error;
 }

@@ -7,3 +7,4 @@
 7. FD : Component = Username (Formik)
 8. FD : Reset UI 
     Here, Component = Password,Recovery,Reset
+9. FD : Component = Register
