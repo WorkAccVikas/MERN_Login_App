@@ -13,3 +13,4 @@
 
 12. BD : Setup at Backend side
 13. BD : Basic MongoDB Connection
+14. BD : Create all routes
