@@ -185,7 +185,39 @@ body: {
 }
 */
 export async function updateUser(req, res) {
-  res.json("updateUser route");
+  try {
+    const { id } = req.query;
+    console.log(id);
+
+    if (!id) return res.status(404).send({ error: "User Not Found...!" });
+
+    const { firstName, address, profile, email } = req.body;
+    const body = { firstName, address, profile, email };
+    console.log(body);
+
+    // Todo : This is useful when we use updateOne
+    // const existUser = await UserModel.findOne({ _id: id });
+    // console.log(existUser);
+    // if (!existUser) return res.status(404).send({ msg: "Record Not Found..!" });
+
+    // Todo : update the data
+    UserModel.findByIdAndUpdate({ _id: id }, body, {
+      new: true,
+      // Todo : Learn : remove particular field from updated document
+      projection: { password: 0 }, // Include or exclude fields using 1 or 0 respectively
+    })
+      .then((data) => {
+        console.log("Sachin = ", data);
+        if (!data) return res.status(404).send({ msg: "Record Not Found..!" });
+
+        return res.status(201).send({ msg: "Record Updated...!", data });
+      })
+      .catch((err) => {
+        throw err;
+      });
+  } catch (error) {
+    return res.status(404).send({ error });
+  }
 }
 
 /** GET: http://localhost:8080/api/generateOTP */

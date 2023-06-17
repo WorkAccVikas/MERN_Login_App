@@ -17,3 +17,4 @@
 15. BD : register controller
 16. BD : login controller
 17. BD : getUser controller
+17. BD : updateUser controller
