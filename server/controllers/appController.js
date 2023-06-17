@@ -1,3 +1,6 @@
+import UserModel from "../model/User.model.js";
+import bcrypt from "bcrypt";
+
 /** POST: http://localhost:8080/api/register 
  * @param : {
   "username" : "example123",
@@ -11,7 +14,69 @@
 }
 */
 export async function register(req, res) {
-  res.json("register route");
+  try {
+    const { username, password, profile, email } = req.body;
+
+    // Todo : check the existing user
+    const existUsername = new Promise((resolve, reject) => {
+      UserModel.findOne({ username })
+        .then((user) => {
+          if (user) reject({ error: "Please use unique username" });
+
+          resolve();
+        })
+        .catch((err) => {
+          reject(new Error(err));
+        });
+    });
+
+    // Todo : check for existing email
+    const existEmail = new Promise((resolve, reject) => {
+      UserModel.findOne({ email })
+        .then((user) => {
+          if (user) reject({ error: "Please use unique Email" });
+
+          resolve();
+        })
+        .catch((err) => {
+          reject(new Error(err));
+        });
+    });
+
+    Promise.all([existUsername, existEmail])
+      .then(() => {
+        if (password) {
+          bcrypt
+            .hash(password, 10)
+            .then((hashedPassword) => {
+              const user = new UserModel({
+                username,
+                password: hashedPassword,
+                profile: profile || "",
+                email,
+              });
+
+              // Todo : return save result as a response
+              user
+                .save()
+                .then((result) =>
+                  res.status(201).send({ msg: "User Register Successfully" })
+                )
+                .catch((error) => res.status(500).send({ error }));
+            })
+            .catch((err) => {
+              return res.status(500).send({
+                error: "Enable to hashed password",
+              });
+            });
+        }
+      })
+      .catch((err) => {
+        return res.status(500).send({ err });
+      });
+  } catch (error) {
+    return res.status(500).send(error);
+  }
 }
 
 /** POST: http://localhost:8080/api/login 

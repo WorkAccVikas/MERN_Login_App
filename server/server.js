@@ -3,6 +3,8 @@ import cors from "cors";
 import morgan from "morgan";
 import connect from "./database/conn.js";
 import router from "./router/route.js";
+import { config } from "dotenv";
+config();
 
 const app = express();
 
@@ -26,7 +28,7 @@ app.use("/api", router);
 connect()
   .then(() => {
     try {
-      app.listen(port, () => {
+      app.listen(process.env.PORT || port, () => {
         console.log(`Server connected to http://localhost:${port}`);
       });
     } catch (error) {
