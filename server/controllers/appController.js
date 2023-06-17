@@ -262,52 +262,30 @@ export async function resetPassword(req, res) {
   try {
     const { username, password } = req.body;
     console.log(username, password);
+
     try {
       // Todo : find user
-      UserModel.findOne({ username })
-        .then((user) => {
-          // Todo : User Found
-          // Todo : Convert password =>  hashPassword
-          bcrypt
-            .hash(password, 10)
-            .then((hashedPassword) => {
-              // Todo : Successfully hashedPassword
-              console.log({ hashedPassword });
-              // Todo : compare password if user enter old password then it will show 400
-              bcrypt
-                .compare(password, user.password)
-                .then((result) => {
-                  // Todo : result : T/F
-                  if (result)
-                    return res
-                      .status(400)
-                      .send({ error: "Please Enter New Password" });
+      const user = await UserModel.findOne({ username });
 
-                  // Todo : Following code executed only when user enter new password
-                  UserModel.findOneAndUpdate(
-                    { username: user.username },
-                    { password: hashedPassword }
-                  )
-                    .then((result) => {
-                      return res.status(201).send({ msg: "Record Updated" });
-                    })
-                    .catch((err) => {
-                      throw err;
-                    });
-                })
-                .catch((err) => {
-                  throw err;
-                });
-            })
-            .catch((err) => {
-              return res
-                .status(500)
-                .send({ error: "Enable to hashed password" });
-            });
-        })
-        .catch((err) => {
-          return res.status(404).send({ error: "Username Not Found" });
-        });
+      if (!user) return res.status(404).send({ error: "Username Not Found" });
+
+      // Todo : Compare password if user enters the old password, then show 400
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if (passwordMatch)
+        return res.status(500).send({ error: "Please Enter New Password" });
+
+      // Todo : Following code executed only when the user enters a new password
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      console.log({ hashedPassword });
+
+      await UserModel.findOneAndUpdate(
+        { username: user.username },
+        { password: hashedPassword }
+      );
+
+      return res.status(201).send({ msg: "Record Updated" });
     } catch (error) {
       res.status(500).send({ error });
     }
