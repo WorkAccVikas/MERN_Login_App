@@ -21,3 +21,4 @@
 19. BD : add auth middleware in updateUser controller
 20. BD : controller = generateOTP, verifyOTP, createSession 
     Here, generateOTP have 2 middleware
+21. BD : resetPassword controller

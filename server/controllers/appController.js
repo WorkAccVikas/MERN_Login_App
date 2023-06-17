@@ -259,5 +259,59 @@ export async function createResetSession(req, res) {
 // update the password when we have valid session
 /** PUT: http://localhost:8080/api/resetPassword */
 export async function resetPassword(req, res) {
-  res.json("resetPassword route");
+  try {
+    const { username, password } = req.body;
+    console.log(username, password);
+    try {
+      // Todo : find user
+      UserModel.findOne({ username })
+        .then((user) => {
+          // Todo : User Found
+          // Todo : Convert password =>  hashPassword
+          bcrypt
+            .hash(password, 10)
+            .then((hashedPassword) => {
+              // Todo : Successfully hashedPassword
+              console.log({ hashedPassword });
+              // Todo : compare password if user enter old password then it will show 400
+              bcrypt
+                .compare(password, user.password)
+                .then((result) => {
+                  // Todo : result : T/F
+                  if (result)
+                    return res
+                      .status(400)
+                      .send({ error: "Please Enter New Password" });
+
+                  // Todo : Following code executed only when user enter new password
+                  UserModel.findOneAndUpdate(
+                    { username: user.username },
+                    { password: hashedPassword }
+                  )
+                    .then((result) => {
+                      return res.status(201).send({ msg: "Record Updated" });
+                    })
+                    .catch((err) => {
+                      throw err;
+                    });
+                })
+                .catch((err) => {
+                  throw err;
+                });
+            })
+            .catch((err) => {
+              return res
+                .status(500)
+                .send({ error: "Enable to hashed password" });
+            });
+        })
+        .catch((err) => {
+          return res.status(404).send({ error: "Username Not Found" });
+        });
+    } catch (error) {
+      res.status(500).send({ error });
+    }
+  } catch (error) {
+    res.status(401).send({ error });
+  }
 }
