@@ -13,3 +13,5 @@
     4.1. npm install express cors mongoose mongodb-memory-server multer nodemon morgan
     4.2. npm install bcrypt
     4.3. npm install dotenv
+    4.4. npm install jsonwebtoken
+

@@ -1,0 +1,2 @@
+1. generate random base64 
+    openssl rand -base64 32
