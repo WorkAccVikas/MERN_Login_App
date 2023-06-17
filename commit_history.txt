@@ -18,3 +18,4 @@
 16. BD : login controller
 17. BD : getUser controller
 17. BD : updateUser controller
+18. BD : add auth middleware in updateUser controller

@@ -121,7 +121,7 @@ export async function login(req, res) {
                 username: user.username,
               },
               process.env.JWT_SECRET,
-              { expiresIn: "24h" }
+              { expiresIn: "1m" }
             );
 
             return res.status(200).send({
@@ -186,7 +186,8 @@ body: {
 */
 export async function updateUser(req, res) {
   try {
-    const { id } = req.query;
+    // const { id } = req.query;
+    const { userId: id } = req.user;
     console.log(id);
 
     if (!id) return res.status(404).send({ error: "User Not Found...!" });
