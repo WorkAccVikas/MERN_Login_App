@@ -16,3 +16,4 @@
 14. BD : Create all routes
 15. BD : register controller
 16. BD : login controller
+17. BD : getUser controller
