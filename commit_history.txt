@@ -24,3 +24,5 @@
 21. BD : resetPassword controller
 22. BD : Code clean = resetPassword controller
     Here, remove thenc and its replace by async and await. Hence, Code quality improved.
+23. BD : Change in resetPassword controller
+    Here, add middleware and session things

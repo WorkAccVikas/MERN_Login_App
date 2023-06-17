@@ -262,7 +262,9 @@ export async function resetPassword(req, res) {
   try {
     const { username, password } = req.body;
     console.log(username, password);
-
+    if (!req.app.locals.resetSession)
+      return res.status(440).send({ error: "Session expired!" });
+      
     try {
       // Todo : find user
       const user = await UserModel.findOne({ username });
@@ -280,11 +282,12 @@ export async function resetPassword(req, res) {
 
       console.log({ hashedPassword });
 
-      await UserModel.findOneAndUpdate(
+      const check = await UserModel.findOneAndUpdate(
         { username: user.username },
         { password: hashedPassword }
       );
-
+      console.log({ check });
+      req.app.locals.resetSession = false; // reset session
       return res.status(201).send({ msg: "Record Updated" });
     } catch (error) {
       res.status(500).send({ error });

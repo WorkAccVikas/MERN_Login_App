@@ -21,6 +21,8 @@ router.route("/createResetSession").get(controller.createResetSession); // reset
 
 // Todo : PUT
 router.route("/updateUser").put(Auth, controller.updateUser); // used to update the user profile
-router.route("/resetPassword").put(controller.resetPassword); // use to reset password
+router
+  .route("/resetPassword")
+  .put(controller.verifyUser, controller.resetPassword); // use to reset password
 
 export default router;
