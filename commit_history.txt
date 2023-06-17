@@ -17,5 +17,7 @@
 15. BD : register controller
 16. BD : login controller
 17. BD : getUser controller
-17. BD : updateUser controller
-18. BD : add auth middleware in updateUser controller
+18. BD : updateUser controller
+19. BD : add auth middleware in updateUser controller
+20. BD : controller = generateOTP, verifyOTP, createSession 
+    Here, generateOTP have 2 middleware
