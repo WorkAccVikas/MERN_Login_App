@@ -16,5 +16,8 @@
     4.4. npm install jsonwebtoken
     4.5. npm install otp-generator
     4.6. npm install nodemailer mailgen 
+
+5. Fetch Data 
+    5.1 npm install axios
     
 

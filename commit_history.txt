@@ -28,4 +28,9 @@
     Here, add middleware and session things
 24. BD : registerMail controller 
     Here, send mail from gmail guide : https://www.youtube.com/watch?v=lBRnLXwjLw0&ab_channel=DailyTuition
+25. Both side changes
+    Here, BD : Change at route.js 
+    BD : add middleware at verifyOTP controller
+    FD : add helper.js at helper folder 
+        Here, Make API requests
     
