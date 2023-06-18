@@ -33,4 +33,5 @@
     BD : add middleware at verifyOTP controller
     FD : add helper.js at helper folder 
         Here, Make API requests
-    
+26. FD : Setup zustand store
+    Here, navigate to password page if user exist in db otherwise show toast message at Username Component

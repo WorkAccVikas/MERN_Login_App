@@ -1,12 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import avatar from "../assets/profile.png";
 import styles from "../styles/Username.module.css";
 import { Toaster } from "react-hot-toast";
 import { useFormik } from "formik";
 import { usernameValidate } from "../helper/validate";
+import { useAuthStore } from "../store/store";
 
 function Username() {
+  const setUsername = useAuthStore((state) => state.setUsername);
+  const username = useAuthStore((state) => state.auth.username);
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    console.log(username);
+  }, [username]);
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -16,6 +25,9 @@ function Username() {
     validateOnChange: false,
     onSubmit: async (values) => {
       console.log(values);
+      setUsername(values.username);
+      // Todo : if user exist navigate to password page
+      navigate("/password");
     },
   });
 

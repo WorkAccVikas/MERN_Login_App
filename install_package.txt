@@ -19,5 +19,8 @@
 
 5. Fetch Data 
     5.1 npm install axios
+
+6. Store
+    6.1 npm install zustand
     
 
