@@ -26,3 +26,6 @@
     Here, remove thenc and its replace by async and await. Hence, Code quality improved.
 23. BD : Change in resetPassword controller
     Here, add middleware and session things
+24. BD : registerMail controller 
+    Here, send mail from gmail guide : https://www.youtube.com/watch?v=lBRnLXwjLw0&ab_channel=DailyTuition
+    
