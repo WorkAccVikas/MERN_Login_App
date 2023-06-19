@@ -5,16 +5,26 @@ import connect from "./database/conn.js";
 import router from "./router/route.js";
 import { config } from "dotenv";
 config();
+import bodyParser from "body-parser";
 
 const app = express();
 
 // Todo : middlewares
-app.use(express.json());
+// app.use(express.json());
 app.use(cors()); // Cross-Origin Resource Sharing (CORS) middleware for Express, using the whitelist method to allow all origins
 app.use(morgan("tiny")); // logs all http request into the console
 app.disable("x-powered-by"); // less hackers know about our stack
 
-const port = 8080;
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
+
+const PORT = process.env.PORT || 8080;
 
 // Todo : Http Get Request
 app.get("/", (req, res) => {
@@ -28,8 +38,8 @@ app.use("/api", router);
 connect()
   .then(() => {
     try {
-      app.listen(process.env.PORT || port, () => {
-        console.log(`Server connected to http://localhost:${port}`);
+      app.listen(PORT, () => {
+        console.log(`Server connected to http://localhost:${PORT}`);
       });
     } catch (error) {
       console.log("Cannot connect to the server");

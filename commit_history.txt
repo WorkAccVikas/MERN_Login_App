@@ -35,3 +35,6 @@
         Here, Make API requests
 26. FD : Setup zustand store
     Here, navigate to password page if user exist in db otherwise show toast message at Username Component
+27. Both side changes 
+    BD : server.js add body-parser middleware because we want to store large image in db 
+    FD : create custom hook and use in components/password.js
