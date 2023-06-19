@@ -15,18 +15,14 @@ export default function useFetch(query) {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!query) return;
-
       try {
         setData((prev) => ({ ...prev, isLoading: true }));
 
-        // const { username } = !query ? await getUsername() : "";
+        const { username } = !query ? await getUsername() : "";
 
-        // const { data, status } = !query
-        //   ? await axios.get(`/api/user/${username}`)
-        //   : await axios.get(`/api/${query}`);
-
-        const { data, status } = await axios.get(`/api/${query}`);
+        const { data, status } = !query
+          ? await axios.get(`/api/user/${username}`)
+          : await axios.get(`/api/${query}`);
 
         if (status === 200) {
           setData((prev) => ({ ...prev, isLoading: false }));

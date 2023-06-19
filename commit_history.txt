@@ -40,3 +40,8 @@
     FD : create custom hook and use in components/password.js
 28. FD : Register component changes
 29. FD : Password component changes
+30. Both side changes 
+    BD : Update user model schema 
+        Change at updateUser controller
+    FD : Major change in Profile Component, few changes in fetch.hook.js
+    add remaining.txt file

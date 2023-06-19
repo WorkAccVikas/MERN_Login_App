@@ -193,8 +193,8 @@ export async function updateUser(req, res) {
 
     if (!id) return res.status(404).send({ error: "User Not Found...!" });
 
-    const { firstName, address, profile, email } = req.body;
-    const body = { firstName, address, profile, email };
+    const { firstName, lastName, address, profile, email, mobile } = req.body;
+    const body = { firstName, lastName, address, profile, email, mobile };
     console.log(body);
 
     // Todo : This is useful when we use updateOne
@@ -264,7 +264,7 @@ export async function resetPassword(req, res) {
     console.log(username, password);
     if (!req.app.locals.resetSession)
       return res.status(440).send({ error: "Session expired!" });
-      
+
     try {
       // Todo : find user
       const user = await UserModel.findOne({ username });

@@ -21,7 +21,6 @@ export const UserSchema = new mongoose.Schema({
   mobile: { type: Number },
   address: { type: String },
   profile: { type: String },
-  firstName: { type: String },
 });
 
 export default mongoose.model.User ||
