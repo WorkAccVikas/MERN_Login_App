@@ -38,3 +38,4 @@
 27. Both side changes 
     BD : server.js add body-parser middleware because we want to store large image in db 
     FD : create custom hook and use in components/password.js
+28. FD : Register component changes
