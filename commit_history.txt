@@ -47,3 +47,4 @@
     add remaining.txt file
 31. FD : Bug Fix = Profile Picture not change when we upload image at /profile before update button click.
 32. FD : Protect Routes at profile,password
+33. FD : Recovery Component
