@@ -48,3 +48,6 @@
 31. FD : Bug Fix = Profile Picture not change when we upload image at /profile before update button click.
 32. FD : Protect Routes at profile,password
 33. FD : Recovery Component
+34. Both side changes 
+    FD : Reset Component major changes & bugs fixed
+    BD : resetPassword controller changes & bugs fixed

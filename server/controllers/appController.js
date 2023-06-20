@@ -42,6 +42,7 @@ export async function register(req, res) {
           resolve();
         })
         .catch((err) => {
+          console.log("1");
           reject(new Error(err));
         });
     });
@@ -55,6 +56,7 @@ export async function register(req, res) {
           resolve();
         })
         .catch((err) => {
+          console.log("2");
           reject(new Error(err));
         });
     });
@@ -62,6 +64,7 @@ export async function register(req, res) {
     Promise.all([existUsername, existEmail])
       .then(() => {
         if (password) {
+          console.log("hi");
           bcrypt
             .hash(password, 10)
             .then((hashedPassword) => {
@@ -78,9 +81,13 @@ export async function register(req, res) {
                 .then((result) =>
                   res.status(201).send({ msg: "User Register Successfully" })
                 )
-                .catch((error) => res.status(500).send({ error }));
+                .catch((error) => {
+                  console.log("3");
+                  return res.status(500).send({ error });
+                });
             })
             .catch((err) => {
+              console.log("4");
               return res.status(500).send({
                 error: "Enable to hashed password",
               });
@@ -88,9 +95,11 @@ export async function register(req, res) {
         }
       })
       .catch((err) => {
+        console.log("5");
         return res.status(500).send({ err });
       });
   } catch (error) {
+    console.log("6");
     return res.status(500).send(error);
   }
 }
@@ -250,8 +259,9 @@ export async function verifyOTP(req, res) {
 /** GET: http://localhost:8080/api/createResetSession */
 export async function createResetSession(req, res) {
   if (req.app.locals.resetSession) {
-    req.app.locals.resetSession = false; // allow access to this route only once
-    return res.status(201).send({ msg: "access granted!" });
+    // req.app.locals.resetSession = false; // allow access to this route only once
+    // return res.status(201).send({ msg: "access granted!" });
+    return res.status(201).send({ flag: req.app.locals.resetSession });
   }
   return res.status(440).send({ error: "Session expired!" });
 }
