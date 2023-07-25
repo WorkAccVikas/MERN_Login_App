@@ -62,3 +62,6 @@
         Change log message of morgan
     Other : 
             Remove all console.log from both sides
+36. FD : Changes
+        Fix UI at Profile.js
+        Rename project name and change fav ico

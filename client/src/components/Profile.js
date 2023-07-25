@@ -67,7 +67,7 @@ function Profile() {
     <div className="container mx-auto">
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen pt-5 mt-5">
         <div
           className={`${styles.glass} ${extend.glass}`}
           style={{ width: "45%", paddingTop: "3em" }}
