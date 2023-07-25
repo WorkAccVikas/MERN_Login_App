@@ -42,21 +42,21 @@ export async function register(req, res) {
           resolve();
         })
         .catch((err) => {
-          console.log("1");
+          // console.log("1");
           reject(new Error(err));
         });
     });
 
     // Todo : check for existing email
     const existEmail = new Promise((resolve, reject) => {
-      UserModel.findOne({ email })
+      UserModel.findOne({ email : email.toLowerCase() })
         .then((user) => {
           if (user) reject({ error: "Please use unique Email" });
 
           resolve();
         })
         .catch((err) => {
-          console.log("2");
+          // console.log("2");
           reject(new Error(err));
         });
     });
@@ -64,7 +64,7 @@ export async function register(req, res) {
     Promise.all([existUsername, existEmail])
       .then(() => {
         if (password) {
-          console.log("hi");
+          // console.log("hi");
           bcrypt
             .hash(password, 10)
             .then((hashedPassword) => {
@@ -72,7 +72,7 @@ export async function register(req, res) {
                 username,
                 password: hashedPassword,
                 profile: profile || "",
-                email,
+                email : email.toLowerCase(),
               });
 
               // Todo : return save result as a response
@@ -82,12 +82,12 @@ export async function register(req, res) {
                   res.status(201).send({ msg: "User Register Successfully" })
                 )
                 .catch((error) => {
-                  console.log("3");
+                  // console.log("3");
                   return res.status(500).send({ error });
                 });
             })
             .catch((err) => {
-              console.log("4");
+              // console.log("4");
               return res.status(500).send({
                 error: "Enable to hashed password",
               });
@@ -95,11 +95,11 @@ export async function register(req, res) {
         }
       })
       .catch((err) => {
-        console.log("5");
+        // console.log("5");
         return res.status(500).send({ err });
       });
   } catch (error) {
-    console.log("6");
+    // console.log("6");
     return res.status(500).send(error);
   }
 }
@@ -119,7 +119,7 @@ export async function login(req, res) {
         bcrypt
           .compare(password, user.password)
           .then((passwordCheck) => {
-            console.log("Ram = ", passwordCheck);
+            // console.log("Ram = ", passwordCheck);
 
             if (!passwordCheck)
               return res.status(400).send({ error: "Don't have Password" });
@@ -160,8 +160,8 @@ export async function getUser(req, res) {
     if (!username) return res.status(501).send({ error: "Invalid Username" });
     UserModel.findOne({ username }, { password: 0 })
       .then((user) => {
-        console.log("vikas = ", user);
-        console.log(!user);
+        // console.log("vikas = ", user);
+        // console.log(!user);
 
         if (!user)
           return res.status(501).send({ error: "Couldn't Find the User" });
@@ -198,13 +198,22 @@ export async function updateUser(req, res) {
   try {
     // const { id } = req.query;
     const { userId: id } = req.user;
-    console.log(id);
+    // console.log(id);
 
     if (!id) return res.status(404).send({ error: "User Not Found...!" });
 
     const { firstName, lastName, address, profile, email, mobile } = req.body;
-    const body = { firstName, lastName, address, profile, email, mobile };
-    console.log(body);
+    const body = { firstName, lastName, address, profile, email : email.toLowerCase(), mobile };
+    // console.log(body);
+
+    if (email) {
+      let result = await UserModel.find({ email: email.toLowerCase() });
+      
+      if (result[0].email !== email)
+        return res
+          .status(409)
+          .json({ error: "Email is already present ......." });
+    }
 
     // Todo : This is useful when we use updateOne
     // const existUser = await UserModel.findOne({ _id: id });
@@ -218,7 +227,7 @@ export async function updateUser(req, res) {
       projection: { password: 0 }, // Include or exclude fields using 1 or 0 respectively
     })
       .then((data) => {
-        console.log("Sachin = ", data);
+        // console.log("Sachin = ", data);
         if (!data) return res.status(404).send({ msg: "Record Not Found..!" });
 
         return res.status(201).send({ msg: "Record Updated...!", data });
@@ -238,7 +247,7 @@ export async function generateOTP(req, res) {
     upperCaseAlphabets: false,
     specialChars: false,
   });
-  console.log(req.app.locals.OTP);
+  // console.log(req.app.locals.OTP);
   res.status(201).send({ code: req.app.locals.OTP });
 }
 
@@ -271,7 +280,7 @@ export async function createResetSession(req, res) {
 export async function resetPassword(req, res) {
   try {
     const { username, password } = req.body;
-    console.log(username, password);
+    // console.log(username, password);
     if (!req.app.locals.resetSession)
       return res.status(440).send({ error: "Session expired!" });
 
@@ -290,13 +299,13 @@ export async function resetPassword(req, res) {
       // Todo : Following code executed only when the user enters a new password
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      console.log({ hashedPassword });
+      // console.log({ hashedPassword });
 
       const check = await UserModel.findOneAndUpdate(
         { username: user.username },
         { password: hashedPassword }
       );
-      console.log({ check });
+      // console.log({ check });
       req.app.locals.resetSession = false; // reset session
       return res.status(201).send({ msg: "Record Updated" });
     } catch (error) {

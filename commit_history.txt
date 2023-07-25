@@ -51,3 +51,14 @@
 34. Both side changes 
     FD : Reset Component major changes & bugs fixed
     BD : resetPassword controller changes & bugs fixed
+35. Both side changes
+    FD :  
+        Fix if you visited /recovery and /reset  page direct it will redirect to home page.
+        add <ProtectRoute> at both routes.
+        Fix UI at Profile.js
+    BD : 
+        Fix /updateUser if you pass existing email for update then it will throw 409 error.
+        On '/register' and '/updateUser': email stored in db lowercase
+        Change log message of morgan
+    Other : 
+            Remove all console.log from both sides

@@ -36,7 +36,7 @@ function Profile() {
       values = await Object.assign(values, {
         profile: file || apiData?.profile || "",
       });
-      console.log(values);
+      // console.log(values);
       let updatePromise = updateUser(values);
 
       toast.promise(updatePromise, {

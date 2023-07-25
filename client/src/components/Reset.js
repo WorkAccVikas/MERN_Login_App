@@ -23,7 +23,7 @@ function Reset() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async (values) => {
-      console.log(values);
+      // console.log(values);
       let resetPromise = resetPassword({ username, password: values.password });
 
       toast.promise(resetPromise, {

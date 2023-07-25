@@ -10,6 +10,7 @@ import useFetch from "../hooks/fetch.hook";
 import { verifyPassword } from "../helper/helper";
 
 function Password() {
+  // console.log("Password re-render");
   const navigate = useNavigate();
   const { username } = useAuthStore((state) => state.auth);
   const [{ isLoading, apiData, serverError }] = useFetch(`/user/${username}`);
@@ -22,7 +23,7 @@ function Password() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async (values) => {
-      console.log(values);
+      // console.log(values);
       let loginPromise = verifyPassword({
         username,
         password: values.password,
@@ -40,7 +41,7 @@ function Password() {
           navigate("/profile");
         })
         .catch((err) => {
-          console.log("hi ram");
+          // console.log("hi ram");
         });
     },
   });
@@ -64,7 +65,10 @@ function Password() {
           </div>
 
           <form className="py-1" onSubmit={formik.handleSubmit}>
-            <div className="profile flex justify-center py-4">
+            <div
+              className="profile flex justify-center py-4 username__profile"
+              disabled={true}
+            >
               <img
                 src={apiData?.profile || avatar}
                 className={styles.profile_img}

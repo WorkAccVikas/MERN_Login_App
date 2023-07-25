@@ -22,7 +22,7 @@ function Register() {
     validateOnChange: false,
     onSubmit: async (values) => {
       values = await Object.assign(values, { profile: file || "" });
-      console.log(values);
+      // console.log(values);
       let registerPromise = registerUser(values);
       toast.promise(registerPromise, {
         loading: "Creating...",
@@ -34,7 +34,7 @@ function Register() {
           navigate("/");
         })
         .catch((err) => {
-          console.log(err.error.response.data.err.error);
+          // console.log(err.error.response.data.err.error);
         });
     },
   });

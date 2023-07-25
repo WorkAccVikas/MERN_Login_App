@@ -11,9 +11,9 @@ function Username() {
   const setUsername = useAuthStore((state) => state.setUsername);
   const username = useAuthStore((state) => state.auth.username);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    console.log(username);
+    // console.log(username);
   }, [username]);
 
   const formik = useFormik({
@@ -24,7 +24,7 @@ function Username() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async (values) => {
-      console.log(values);
+      // console.log(values);
       setUsername(values.username);
       // Todo : if user exist navigate to password page
       navigate("/password");
@@ -44,7 +44,10 @@ function Username() {
           </div>
 
           <form className="py-1" onSubmit={formik.handleSubmit}>
-            <div className="profile flex justify-center py-4">
+            <div
+              className="profile flex justify-center py-4 username__profile"
+              disabled={true}
+            >
               <img src={avatar} className={styles.profile_img} alt="avatar" />
             </div>
 

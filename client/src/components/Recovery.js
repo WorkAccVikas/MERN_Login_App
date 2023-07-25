@@ -6,12 +6,13 @@ import { useAuthStore } from "../store/store";
 import { generateOTP, verifyOTP } from "../helper/helper";
 
 function Recovery() {
+  console.log("Recovery re-render");
   const { username } = useAuthStore((state) => state.auth);
   const [OTP, setOTP] = useState();
   const navigate = useNavigate();
   useEffect(() => {
     generateOTP(username).then((OTP) => {
-      console.log(OTP);
+      // console.log(OTP);
       if (OTP) return toast.success("OTP has been send to your email!");
       return toast.error("Problem while generating OTP!");
     });
@@ -41,7 +42,7 @@ function Recovery() {
     });
 
     sentPromise.then((OTP) => {
-      console.log(OTP);
+      // console.log(OTP);
     });
   }
 

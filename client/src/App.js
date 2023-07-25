@@ -41,11 +41,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/recovery",
-    element: <Recovery />,
+    element: (
+      <ProtectRoute>
+        <Recovery />
+      </ProtectRoute>
+    ),
   },
   {
     path: "/reset",
-    element: <Reset />,
+    element: (
+      <ProtectRoute>
+        <Reset />
+      </ProtectRoute>
+    ),
   },
   {
     path: "*",

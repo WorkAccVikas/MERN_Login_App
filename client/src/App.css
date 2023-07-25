@@ -1,0 +1,4 @@
+.username__profile[disabled] > * {
+  /* You can choose a different cursor style to indicate it's disabled */
+  cursor: not-allowed;
+}

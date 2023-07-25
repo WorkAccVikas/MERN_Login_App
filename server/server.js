@@ -12,8 +12,22 @@ const app = express();
 // Todo : middlewares
 // app.use(express.json());
 app.use(cors()); // Cross-Origin Resource Sharing (CORS) middleware for Express, using the whitelist method to allow all origins
-app.use(morgan("tiny")); // logs all http request into the console
+// app.use(morgan("tiny")); // logs all http request into the console
 app.disable("x-powered-by"); // less hackers know about our stack
+
+// Custom format function for morgan logging
+morgan.token("custom-time", () => {
+  const date = new Date();
+  const formattedDate = date.toISOString().replace("T", " ").slice(0, -1);
+  return formattedDate;
+});
+
+// Define the custom logging format
+const customLoggingFormat =
+  ":custom-time - :method :url :status :response-time ms";
+
+// Apply morgan middleware with the custom format
+app.use(morgan(customLoggingFormat));
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(
