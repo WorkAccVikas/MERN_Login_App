@@ -49,7 +49,7 @@ export async function register(req, res) {
 
     // Todo : check for existing email
     const existEmail = new Promise((resolve, reject) => {
-      UserModel.findOne({ email : email.toLowerCase() })
+      UserModel.findOne({ email: email.toLowerCase() })
         .then((user) => {
           if (user) reject({ error: "Please use unique Email" });
 
@@ -72,7 +72,7 @@ export async function register(req, res) {
                 username,
                 password: hashedPassword,
                 profile: profile || "",
-                email : email.toLowerCase(),
+                email: email.toLowerCase(),
               });
 
               // Todo : return save result as a response
@@ -203,16 +203,23 @@ export async function updateUser(req, res) {
     if (!id) return res.status(404).send({ error: "User Not Found...!" });
 
     const { firstName, lastName, address, profile, email, mobile } = req.body;
-    const body = { firstName, lastName, address, profile, email : email.toLowerCase(), mobile };
+    const body = {
+      firstName,
+      lastName,
+      address,
+      profile,
+      email: email.toLowerCase(),
+      mobile,
+    };
     // console.log(body);
 
     if (email) {
-      let result = await UserModel.find({ email: email.toLowerCase() });
-      
-      if (result[0].email !== email)
+      let result = await UserModel.findOne({ email: email.toLowerCase() }); // LEARN : if we don't use optional chaining then request is in loading state because result = null
+      if (result?.email === email && result._id !== id) {
         return res
           .status(409)
           .json({ error: "Email is already present ......." });
+      }
     }
 
     // Todo : This is useful when we use updateOne

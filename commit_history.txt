@@ -65,3 +65,5 @@
 36. FD : Changes
         Fix UI at Profile.js
         Rename project name and change fav ico
+37. BD : Changes 
+        Fix /updateUser API
